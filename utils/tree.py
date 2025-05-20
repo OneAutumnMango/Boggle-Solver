@@ -3,6 +3,9 @@ class Node:
         self.children = {}
         self.is_word = False
 
+    def __str__(self):
+        return str(self.children)
+
 class Tree:
     def __init__(self):
         self.root = Node()
@@ -19,3 +22,6 @@ class Tree:
             next_node = node.children[char]
             return next_node, next_node.is_word
         return None, False
+    
+    def __str__(self):
+        return str(self.root)
