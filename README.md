@@ -1,54 +1,67 @@
 # Boggle Solver
 
-This is a **Boggle solver** implemented in Python. It uses a **dictionary tree (trie)** data structure for efficient word and prefix checking, combined with a **Depth-First Search (DFS)** algorithm to explore possible words on the Boggle board.
+This is a **Boggle solver** implemented in Python. It uses a **dictionary trie** (prefix tree) to incrementally follow valid word paths as it explores the board with **Depth-First Search (DFS)**. The solver avoids redundant work by advancing through the trie at each step, pruning invalid paths early without re-checking prefixes from the root.
 
 ---
 
-## Features
-
-- **Dictionary Tree (Trie)**  
-  Efficiently stores a large dictionary of words, allowing quick lookups to check if a current letter sequence is a valid prefix or complete word. This enables early pruning during the search.
-
-- **Depth-First Search (DFS)**  
-  Recursively explores the Boggle board starting from each letter, building words by moving to adjacent letters (including diagonals), while avoiding revisiting the same cell in the current path.
-
-- **Customizable Board Size**  
-  Supports different board sizes, although standard Boggle is 4x4.
-
----
-
-## How It Works
-
-1. **Load Dictionary into Trie**  
-   The dictionary file is parsed, and each word is inserted into the tree where each node represents a letter.
-
-2. **Generate or Load Boggle Board**  
-   The board is a grid of letters. It can be randomly generated or manually specified.
-
-3. **Search for Words**  
-   Starting from each cell on the board, the solver performs a DFS, following adjacent cells to form letter sequences. At each step, it checks the trie to verify if the current sequence is a valid prefix. If not, it backtracks early.
-
-4. **Collect Valid Words**  
-   Whenever a complete word from the dictionary is formed, it is added to the list of found words.
-
+## Requirements
+- Python 3.6+ 
+- A word list file (newline-delimited). You can use:
+  - `sowpods.txt` from [scrabblewords/scrabblewords](https://github.com/scrabblewords/scrabblewords)
+  - Or any plain text file with one word per line
 ---
 
 ## Usage
 
-```python
-from tree import Tree
-from boggle import Boggle
-from boggle_solver import BoggleSolver
+Run the solver from the command line:
 
-# Load dictionary tree
-dictionary = DictionaryBuilder().get_or_build()
+```bash
+python main.py muyvtsndlbaiewfl
+```
 
-# Create a Boggle board (random or fixed)
-board = Boggle()
+This example provides a 4x4 Boggle board using the letters a–p. The solver prints all found words, sorted alphabetically and by length.
 
-# Initialize solver
-solver = BoggleSolver(dictionary, board)
+---
 
-# Solve and print set of found words
-words = solver.solve()
-print(words)
+## Example Output
+
+```
+❯ python main.py muyvtsndlbaiewfl
+BOARD:
+m u y v
+t s n d
+l b a i
+e w f l
+
+ALPHABETICAL ORDER:
+['abe', 'abel', 'abl', 'able', ...]
+
+BY LENGTH:
+['findable', 'finable', 'sunbelt', 'sundial', ...]
+Found 308 words
+```
+
+---
+
+## Project Structure
+
+```
+.
+├── main.py               # CLI entry point
+├── sowpods.txt           # Word list
+├── tree.pkl              # Cached trie (auto-generated)
+└── utils/
+    ├── __init__.py
+    ├── tree.py           # Trie implementation
+    ├── dictionary.py     # Dictionary loader/builder
+    ├── boggle.py         # Boggle board representation
+    └── boggle_solver.py  # DFS word solver
+```
+
+---
+
+## Customization
+
+- Change the board size by modifying the `Boggle` class `size` argument (default is 4×4).
+- Replace `sowpods.txt` with your preferred dictionary.
+

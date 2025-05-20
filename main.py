@@ -13,7 +13,7 @@ def main():
     
     dictionary = DictionaryBuilder().get_or_build()
     solver = BoggleSolver(dictionary, boggle)
-    
+    print("BOARD:")
     print(boggle)
 
     words = solver.solve()
