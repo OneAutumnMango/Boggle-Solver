@@ -3,6 +3,9 @@ class Node:
         self.children = {}
         self.is_word = False
 
+    def next(self, char: str) -> 'Node':
+        return self.children.get(char)
+
     def __str__(self):
         return str(self.children)
 
@@ -18,13 +21,6 @@ class Tree:
 
     def start(self, letter: str) -> Node:
         return self.root.children.get(letter)
-
-    def next(self, node: Node, char: str) -> tuple[Node, bool]:
-        """Advance to the next node if char is valid, else return None."""
-        if char in node.children:
-            next_node = node.children[char]
-            return next_node, next_node.is_word
-        return None, False
     
     def is_word(self, word: str) -> bool:
         node = self.root
