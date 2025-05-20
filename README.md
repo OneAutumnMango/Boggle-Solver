@@ -60,7 +60,7 @@ Found 308 words
 
 ---
 
-## Customization
+## Customisation
 
 - Change the board size by modifying the `Boggle` class `size` argument (default is 4×4).
 - Replace `sowpods.txt` with your preferred dictionary.
