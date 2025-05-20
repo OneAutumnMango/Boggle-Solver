@@ -1,6 +1,6 @@
-from tree import Tree
-from boggle import Boggle
-from dictionary import DictionaryBuilder
+from utils.tree import Tree
+from utils.boggle import Boggle
+from utils.dictionary import DictionaryBuilder
 
 
 class BoggleSolver:

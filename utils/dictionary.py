@@ -1,6 +1,6 @@
 import pickle
 from pathlib import Path
-from tree import Tree
+from utils.tree import Tree
 
 class DictionaryBuilder:
     def __init__(self, min_length=3):
@@ -17,7 +17,8 @@ class DictionaryBuilder:
             tree.insert(word)
         return tree
     
-    def get_or_build(self, dict_path: Path=Path("words_alpha.txt"), rebuild=False):
+    def get_or_build(self, dict_path: Path=Path("sowpods.txt"), rebuild=False):
+        tree = None
         pkl_path = Path("tree.pkl")
         if rebuild or not pkl_path.exists():
             tree = self._build(dict_path)
@@ -34,9 +35,7 @@ class DictionaryBuilder:
     
     @min_length.setter
     def min_length(self, value):
-        if hasattr(self, '_min_length'):
-            raise AttributeError("min_length is immutable")
-        self._min_length = value
+        raise AttributeError("min_length is immutable")
         
         
 
