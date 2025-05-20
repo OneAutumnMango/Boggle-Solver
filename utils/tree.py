@@ -23,5 +23,13 @@ class Tree:
             return next_node, next_node.is_word
         return None, False
     
+    def is_word(self, word: str) -> bool:
+        node = self.root
+        for char in word:
+            node, is_word = self.next(node, char)
+            if not node:
+                return False
+        return is_word        
+    
     def __str__(self):
         return str(self.root)
