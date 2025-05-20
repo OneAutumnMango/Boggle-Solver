@@ -23,7 +23,7 @@ class BoggleSolver:
     def _dfs(self, x, y, path, node, visited):
         visited.add((x, y))
 
-        print(f"checking {path}: is word? {node.is_word}")
+        # print(f"checking {path}: is word? {node.is_word}")
         if node.is_word:
             self._found.add(path)
 
