@@ -1,3 +1,4 @@
+import math
 import random
 
 LETTER_WEIGHTS = {
@@ -9,9 +10,21 @@ LETTER_WEIGHTS = {
 LETTERS, WEIGHTS = zip(*LETTER_WEIGHTS.items())
 
 class Boggle:
-    def __init__(self, board=None, size=4):
-        self.size = size
-        self.board = board or self.scramble()
+    def __init__(self, *, board=None, size=4, board_str=None):
+        if board_str:
+            length = len(board_str)
+            side = int(math.sqrt(length))
+            if side * side != length:
+                raise ValueError("board_str length must be a perfect square")
+            self.size = side
+            # Create 2D board from string
+            self.board = [
+                list(board_str[i * self.size:(i + 1) * self.size])
+                for i in range(self.size)
+            ]
+        else:
+            self.size = size
+            self.board = board or self.scramble()
 
     def scramble(self):
         # TODO use the dice
@@ -54,3 +67,6 @@ if __name__ == "__main__":
     print("Neighbours:")
     for nx, ny in boggle.neighbours(1, 1):
         print(f"({nx}, {ny}) = {boggle[nx, ny]}")
+
+    boggle = Boggle(board_str="abcdefghi")
+    print(boggle)
