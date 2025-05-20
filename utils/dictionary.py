@@ -17,7 +17,7 @@ class DictionaryBuilder:
             tree.insert(word)
         return tree
     
-    def get_or_build(self, dict_path: Path, rebuild=False):
+    def get_or_build(self, dict_path: Path=Path("words_alpha.txt"), rebuild=False):
         pkl_path = Path("tree.pkl")
         if rebuild or not pkl_path.exists():
             tree = self._build(dict_path)
