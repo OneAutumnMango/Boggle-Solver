@@ -9,11 +9,10 @@ def main():
     args = parser.parse_args()
 
     board = args.board.lower()
-    boggle = Boggle(size=4, board_str=board)
-    
+   
     dictionary = DictionaryBuilder().get_or_build()
     # solver = BoggleSolver(dictionary, boggle)
-    solver = BoggleSolver.from_string(dictionary, 'abcdefghijklmnop')
+    solver = BoggleSolver.from_string(dictionary, board)
     # print("BOARD:")
     # print(boggle)
 
