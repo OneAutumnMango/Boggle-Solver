@@ -9,6 +9,11 @@ class BoggleSolver:
         self._boggle = boggle
         self._found = set()
 
+    @classmethod
+    def from_string(cls, dictionary_tree: Tree, boggle_str: str):
+        return cls(dictionary_tree, Boggle(board_str=boggle_str))
+
+
     def _enumerate(self, position): # DFS at position of boggle going through whole board
         x, y = position
 

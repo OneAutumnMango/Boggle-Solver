@@ -12,9 +12,10 @@ def main():
     boggle = Boggle(size=4, board_str=board)
     
     dictionary = DictionaryBuilder().get_or_build()
-    solver = BoggleSolver(dictionary, boggle)
-    print("BOARD:")
-    print(boggle)
+    # solver = BoggleSolver(dictionary, boggle)
+    solver = BoggleSolver.from_string(dictionary, 'abcdefghijklmnop')
+    # print("BOARD:")
+    # print(boggle)
 
     words = solver.solve()
     print("\nALPHABETICAL ORDER")
@@ -24,6 +25,7 @@ def main():
     print(sorted(words, key=len, reverse=True))
 
     print(f"Found {len(words)} words")
+
 
 
 if __name__ == "__main__":
